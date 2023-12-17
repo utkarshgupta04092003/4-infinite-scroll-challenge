@@ -56,7 +56,12 @@ The React Infinite Scroll Project is a web application built with React, Vite, a
 
 ## Screenshots
 
-![React Infinite Scroll Screenshot](./screenshot.png)
+![image](https://github.com/utkarshgupta04092003/4-infinite-scroll-challenge/assets/63789702/e9fc1c8b-9b13-452d-98d4-43c7f1d89e83)
+
+![image](https://github.com/utkarshgupta04092003/4-infinite-scroll-challenge/assets/63789702/d4c2c644-4900-4e0b-96eb-f358a1d913df)
+
+![image](https://github.com/utkarshgupta04092003/4-infinite-scroll-challenge/assets/63789702/e2302946-4978-4612-8232-7cf6705bb54a)
+
 
 ## Project Structure
 
@@ -82,6 +87,3 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 
 This project is licensed under the [MIT License](LICENSE), allowing you to use and modify the code for personal and commercial purposes.
 
----
-
-Feel free to customize this template according to your project's specific details and structure. Add more sections if needed, and make sure to update the screenshot and project structure details accordingly.
