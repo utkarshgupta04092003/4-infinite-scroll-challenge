@@ -1,52 +1,71 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import InfiniteScroll from 'react-infinite-scroll-component';
+import Image from './components/Image';
+import Header from './components/Header';
+// import process.env.REACT_APP_UNPLASH_ACCESS_KEY from ;
+import { REACT_APP_UNPLASH_ACCESS_KEY } from '../utils';
+
 
 export default function App() {
 
-  const [items, setItems] = useState(Array.from({ length: 30 }));
+  const [items, setItems] = useState([]);
   const [hasMore, setHasMore] = useState(true);
-  const count=60
-  const fetchData = () => {
-
-    if (items.length < count) {
+  const delay = 2000;
 
 
-      setTimeout(() => {
-        setItems((prevItems) => {
-          return prevItems.concat(Array.from({ length: 10 }))
-        })
+  const fetchData = async ()=>{
 
-      }, 1000);
 
-    }
-    else 
-      setHasMore(false);
+    setTimeout(async () => {
+      
+      // Go to unsplash.com, register yourself as a developer, then create a app and copy the access key 
+      // Now create a utils.js file parallel to package.json and save you access key there as a const variable REACT_APP_UNPLASH_ACCESS_KEY
+      let response = await fetch(`https://api.unsplash.com/photos/?client_id=${REACT_APP_UNPLASH_ACCESS_KEY}&per_page=30`, { 
+        method: "GET",
+      });
+      
+      let data = await response.json();
+      console.log(data);
+      setItems((prevItems)=>{
+        return prevItems.concat(data);
+      });
+      
+    }, delay);
   }
+  useEffect(() => {
+    
+    fetchData();
+  },[]);
+
 
   return (
     <div>
-      <h1 className='font-bold text-xl m-2'>Infinite scroll </h1>
-      <p className='fixed top-0 right-0 font-bold text-xl m-2'>Box count: {items.length}</p>
 
+      <Header count={items.length}/>
       <InfiniteScroll
         dataLength={items.length}
         next={fetchData}
         hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
+        loader={<h4 className='font-bold text-2xl text-center mb-5'>Loading...</h4>}
 
         
         endMessage={
           <p style={{ textAlign: 'center' }}>
-            <b>Yay! You have seen it all and reached {count}</b>
+            <b>Yay! You have seen it all.</b>
           </p>
         }
       >
-        {items.map((item, index) => (
-          <div key={index}
-            className=' h-[50px] m-2 border border-green-500 flex justify-center items-center'>
-            div - #{index}
+        <div className=' flex flex-wrap justify-center mt-12'>
+
+          {items.map((item, index) => (
+
+            <Image key={index} image={item.urls.small} />
+            // <div key={index}
+            //   className=' h-[50px] m-2 border border-green-500 flex justify-center items-center'>
+            //   div - #{index} - {item.id}
+            // </div>
+            ))}
           </div>
-        ))}
 
       </InfiniteScroll>
 
